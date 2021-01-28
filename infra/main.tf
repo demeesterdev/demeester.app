@@ -26,4 +26,8 @@ resource "azurerm_resource_group" "demdev-dns" {
 resource "azurerm_dns_zone" "demdev-dns-public" {
   name                = "demdev.app"
   resource_group_name = azurerm_resource_group.demdev-dns.name
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
