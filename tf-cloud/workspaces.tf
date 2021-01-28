@@ -29,7 +29,8 @@ locals {
     ["ARM_CLIENT_SECRET", random_password.tf_cloud.result],
     ["ARM_CLIENT_ID", azuread_service_principal.tf_cloud.application_id],
     ["ARM_SUBSCRIPTION_ID", data.azurerm_subscription.primary.subscription_id],
-    ["ARM_TENANT_ID", var.tenant_id]
+    ["ARM_TENANT_ID", var.tenant_id],
+    ["CONFIRM_DESTROY", "1"]
   ]
 
   etf_variables = flatten([
@@ -52,7 +53,5 @@ resource "tfe_variable" "azureprovider" {
   workspace_id = each.value.workspace_id
   description  = "Authentication env variable for provider hashicorp/azuread"
   sensitive    = true
-
-
 }
 
