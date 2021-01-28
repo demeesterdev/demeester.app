@@ -1,5 +1,5 @@
 output "dns_zone_name" {
-  value = azurerm_dns_zone.demdev-dns-public.name
+  value = azurerm_dns_zone.demeesterapp-dns-public.name
 }
 
 output "dns_zone_resource_group_name" {

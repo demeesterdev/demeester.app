@@ -13,7 +13,6 @@ terraform {
   }
 }
 
-
 provider "azurerm" {
   features {}
 }
@@ -23,11 +22,19 @@ resource "azurerm_resource_group" "demdev-dns" {
   location = "West Europe"
 }
 
+resource "azurerm_dns_zone" "demeesterapp-dns-public" {
+  name                = "demeester.app"
+  resource_group_name = azurerm_resource_group.demdev-dns.name
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
 resource "azurerm_dns_zone" "demdev-dns-public" {
   name                = "demdev.app"
   resource_group_name = azurerm_resource_group.demdev-dns.name
 
   lifecycle {
-    prevent_destroy = true
   }
 }
