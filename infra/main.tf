@@ -31,3 +31,13 @@ resource "azurerm_dns_zone" "demeesterapp-dns-public" {
   }
 }
 
+resource "azurerm_dns_a_record" "example" {
+  name                = "local"
+  zone_name           = azurerm_dns_zone.demeesterapp-dns-public.name
+  resource_group_name = azurerm_resource_group.demdev-dns.name
+  ttl                 = 300
+  records             = ["127.0.0.1"]
+}
+
+
+
