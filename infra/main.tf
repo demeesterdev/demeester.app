@@ -31,10 +31,3 @@ resource "azurerm_dns_zone" "demeesterapp-dns-public" {
   }
 }
 
-resource "azurerm_dns_zone" "demdev-dns-public" {
-  name                = "demdev.app"
-  resource_group_name = azurerm_resource_group.demdev-dns.name
-
-  lifecycle {
-  }
-}
