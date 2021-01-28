@@ -1,11 +1,7 @@
-output "dns_zone_name" {
-  value = azurerm_dns_zone.demeesterapp-dns-public.name
+output "application_domain_name" {
+  value = var.application_domain
 }
 
-output "dns_zone_resource_group_name" {
-  value = azurerm_resource_group.demdev-dns.name
-}
-
-output "dns_zone_servers" {
-  value = azurerm_dns_zone.demeesterapp-dns-public.name_servers
+output "application_dns_zone_servers" {
+  value = azurerm_dns_zone.app_dns_public.name_servers
 }
