@@ -3,6 +3,14 @@ resource "azurerm_resource_group" "artifacts" {
   location = "West Europe"
 }
 
+resource "azurerm_dns_cname_record" "artifacts" {
+  name                = var.artifacts_dubdomain
+  zone_name           = azurerm_dns_zone.app_dns_public.name
+  resource_group_name = azurerm_resource_group.dns.name
+  ttl                 = 300
+  record              = "${var.resource_prefix}artifacts.blob.core.windows.net"
+}
+
 resource "azurerm_storage_account" "artifacts" {
   name                     = "${var.resource_prefix}artifacts"
   resource_group_name      = azurerm_resource_group.artifacts.name
@@ -12,7 +20,7 @@ resource "azurerm_storage_account" "artifacts" {
   min_tls_version          = "TLS1_2"
 
   custom_domain {
-      name = "${var.artifacts_dubdomain}.${azurerm_dns_zone.app_dns_public.name}"
+      name = azurerm_dns_cname_record.artifacts.fqdn
   }
 
   lifecycle {
@@ -20,10 +28,3 @@ resource "azurerm_storage_account" "artifacts" {
   }
 }
 
-resource "azurerm_dns_cname_record" "artifacts" {
-  name                = var.artifacts_dubdomain
-  zone_name           = azurerm_dns_zone.app_dns_public.name
-  resource_group_name = azurerm_resource_group.dns.name
-  ttl                 = 300
-  record              = azurerm_storage_account.artifacts.primary_blob_host
-}
