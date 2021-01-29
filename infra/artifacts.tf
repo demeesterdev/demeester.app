@@ -20,11 +20,29 @@ resource "azurerm_storage_account" "artifacts" {
   min_tls_version          = "TLS1_2"
 
   custom_domain {
-      name = azurerm_dns_cname_record.artifacts.fqdn
+    name = azurerm_dns_cname_record.artifacts.fqdn
   }
 
   lifecycle {
     prevent_destroy = true
   }
+
+  static_website {
+    error_404_document = "404.html"
+  }
 }
+
+resource "azurerm_storage_container" "artifacts_web" {
+  name                 = "$web"
+  storage_account_name = azurerm_storage_account.artifacts.name
+}
+
+resource "azurerm_storage_blob" "artifacts_web_404" {
+  name                   = "404.json"
+  storage_account_name   = azurerm_storage_account.artifacts.name
+  storage_container_name = azurerm_storage_container.artifacts_web.name
+  type                   = "Block"
+  source_content         = "<HTML><body>Not Found</body></HTML>"
+}
+
 
