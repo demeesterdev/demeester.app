@@ -8,7 +8,7 @@ resource "azurerm_dns_cname_record" "artifacts" {
   zone_name           = azurerm_dns_zone.app_dns_public.name
   resource_group_name = azurerm_resource_group.dns.name
   ttl                 = 300
-  record              = "${var.resource_prefix}artifacts.z5.web.core.windows.net"
+  record              = "${var.resource_prefix}artifacts.z6.web.core.windows.net"
 }
 
 resource "azurerm_storage_account" "artifacts" {
