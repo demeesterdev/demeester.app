@@ -38,7 +38,7 @@ data "azurerm_storage_container" "artifacts_web" {
 }
 
 resource "azurerm_storage_blob" "artifacts_web_404" {
-  name                   = "404.json"
+  name                   = "404.html"
   storage_account_name   = azurerm_storage_account.artifacts.name
   storage_container_name = data.azurerm_storage_container.artifacts_web.name
   type                   = "Block"
