@@ -8,7 +8,7 @@ resource "azurerm_dns_cname_record" "artifacts" {
   zone_name           = azurerm_dns_zone.app_dns_public.name
   resource_group_name = azurerm_resource_group.dns.name
   ttl                 = 300
-  record              = "${var.resource_prefix}artifacts.blob.core.windows.net"
+  record              = "${var.resource_prefix}artifacts.z5.web.core.windows.net"
 }
 
 resource "azurerm_storage_account" "artifacts" {
@@ -32,15 +32,15 @@ resource "azurerm_storage_account" "artifacts" {
   }
 }
 
-resource "azurerm_storage_container" "artifacts_web" {
-  name                 = "$web"
+data "azurerm_storage_container" "example" {
+  name                 = "example-container-name"
   storage_account_name = azurerm_storage_account.artifacts.name
 }
 
 resource "azurerm_storage_blob" "artifacts_web_404" {
   name                   = "404.json"
   storage_account_name   = azurerm_storage_account.artifacts.name
-  storage_container_name = azurerm_storage_container.artifacts_web.name
+  storage_container_name = data.azurerm_storage_container.artifacts_web.name
   type                   = "Block"
   source_content         = "<HTML><body>Not Found</body></HTML>"
 }
