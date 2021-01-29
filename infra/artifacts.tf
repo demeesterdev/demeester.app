@@ -32,7 +32,7 @@ resource "azurerm_storage_account" "artifacts" {
   }
 }
 
-data "azurerm_storage_container" "example" {
+data "azurerm_storage_container" "artifacts_web" {
   name                 = "example-container-name"
   storage_account_name = azurerm_storage_account.artifacts.name
 }
