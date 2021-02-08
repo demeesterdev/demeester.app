@@ -13,7 +13,7 @@ variable "workspaces" {
     {
       name              = "chef-training",
       repository        = "chef-training"
-      working_directory = "/"
+      working_directory = ""
     }
   ]
 }

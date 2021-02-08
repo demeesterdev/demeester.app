@@ -6,10 +6,10 @@ resource "azurerm_resource_group" "keystore" {
 }
 
 resource "azurerm_key_vault" "keystore" {
-  name                        = "${var.resource_prefix}-keys"
-  location                    = azurerm_resource_group.keystore.location
-  resource_group_name         = azurerm_resource_group.keystore.name
-  tenant_id                   = data.azurerm_client_config.current.tenant_id
+  name                = "${var.resource_prefix}-keys"
+  location            = azurerm_resource_group.keystore.location
+  resource_group_name = azurerm_resource_group.keystore.name
+  tenant_id           = data.azurerm_client_config.current.tenant_id
 
   sku_name = "standard"
 }
