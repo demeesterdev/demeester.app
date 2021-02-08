@@ -24,3 +24,21 @@ resource "azurerm_dns_txt_record" "keystore" {
     value = azurerm_key_vault.keystore.id
   }
 }
+
+resource "azurerm_key_vault_access_policy" "terraform_spn" {
+  key_vault_id = azurerm_key_vault.keystore.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = data.azurerm_client_config.current.object_id
+
+  key_permissions = [
+    "get",
+  ]
+
+  secret_permissions = [
+      "set",
+      "get",
+      "delete",
+      "purge",
+      "recover"
+    ]
+}
