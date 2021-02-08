@@ -4,7 +4,8 @@ provider "acme" {
 }
 
 resource "tls_private_key" "acme_key_staging" {
-  algorithm = "ECDSA"
+  algorithm   = "ECDSA"
+  ecdsa_curve = "P384"
 }
 
 resource "acme_registration" "registration_staging" {
@@ -25,7 +26,8 @@ provider "acme" {
 }
 
 resource "tls_private_key" "acme_key_production" {
-  algorithm = "ECDSA"
+  algorithm   = "ECDSA"
+  ecdsa_curve = "P384"
 }
 
 resource "acme_registration" "registration_production" {
