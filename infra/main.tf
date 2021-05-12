@@ -9,12 +9,6 @@ terraform {
       version = "2.0.0"
     }
   }
-  backend "remote" {
-    organization = "demeesterdev"
-    workspaces {
-      name = "app-infra"
-    }
-  }
 }
 
 provider "azurerm" {
