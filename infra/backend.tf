@@ -1,8 +1,8 @@
 terraform {
   backend "remote" {
-    organization = demeesterdev
+    organization = "demeesterdev"
     workspaces {
-      name = app-infra
+      name = "app-infra"
     }
   }
 }
