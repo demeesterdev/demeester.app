@@ -8,15 +8,15 @@ data "tfe_oauth_client" "github" {
 }
 
 resource "tfe_workspace" "infra" {
-  for_each           = { for workspace in var.workspaces : workspace.name => workspace }
+  for_each           = { for project in var.projects : project.tf_workspace_name => project }
   auto_apply         = true
   allow_destroy_plan = true
-  name               = each.value.name
+  name               = each.value.tf_workspace_name
   organization       = tfe_organization.primary.id
   working_directory  = each.value.working_directory
 
   vcs_repo {
-    identifier         = "${var.github_workspace}/${each.value.repository}"
+    identifier         = github_repository.project[each.value.repository].full_name
     ingress_submodules = false
     oauth_token_id     = data.tfe_oauth_client.github.oauth_token_id
   }

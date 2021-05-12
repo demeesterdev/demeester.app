@@ -29,13 +29,13 @@ resource "random_password" "tf_cloud" {
     rotation = time_rotating.main.id
   }
 
-  length = 32
+  length  = 32
   special = true
 }
 
 resource "azuread_service_principal_password" "tf_cloud" {
   service_principal_id = azuread_service_principal.tf_cloud.id
-  value                = random_password.tf_cloud.result 
+  value                = random_password.tf_cloud.result
   end_date_relative    = "8760h" #365 days
 }
 

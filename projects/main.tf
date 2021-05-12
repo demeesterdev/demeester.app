@@ -3,7 +3,7 @@ terraform {
     organization = "demeesterdev"
 
     workspaces {
-      name = "terraform-cloud"
+      name = "projects"
     }
   }
 
@@ -12,7 +12,7 @@ terraform {
       source  = "hashicorp/tfe"
       version = "~> 0.24.0"
     }
-    azuread =  {
+    azuread = {
       source  = "hashicorp/azuread"
       version = "~>0.7.0"
     }
@@ -29,4 +29,8 @@ provider "azurerm" {
 
 provider "azuread" {
   tenant_id = var.tenant_id
+}
+
+provider "github" {
+  owner = var.github_owner
 }

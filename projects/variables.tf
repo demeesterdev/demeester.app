@@ -1,19 +1,30 @@
-variable "workspaces" {
+variable "projects" {
   type = list(object({
-    name              = string
     repository        = string
+    tf_workspace_name = string
     working_directory = string
   }))
   default = [
     {
-      name              = "app-infra",
-      repository        = "demeester.app"
+
+      repository        = "demeester.app",
+      tf_workspace_name = "app-infra",
       working_directory = "/infra"
     },
     {
-      name              = "chef-training",
-      repository        = "chef-training"
-      working_directory = ""
+      tf_workspace_name = "cloud-proxy",
+      repository        = "proxy.demeester.app"
+      working_directory = "/infra"
+    },
+    {
+      tf_workspace_name = "homecluster-cloud-infra",
+      repository        = "home.demeester.app"
+      working_directory = "/infra"
+    },
+    {
+      tf_workspace_name = "static",
+      repository        = "static.demeester.app"
+      working_directory = "/infra"
     }
   ]
 }
@@ -26,14 +37,14 @@ variable "tfe_organization" {
 
   })
   default = {
-    name         = "demeesterdev"
-    email        = "app.terraform.io@demeester.dev"
+    name  = "demeesterdev"
+    email = "app.terraform.io@demeester.dev"
     # https://app.terraform.io/api/v2/organizations/demeesterdev/oauth-clients
     oauth_client = "oc-A1aC38r24YaHkpU3"
   }
 }
 
-variable "github_workspace" {
+variable "github_owner" {
   default = "demeesterdev"
 }
 
@@ -47,6 +58,6 @@ variable "tenant_id" {
   default = "33fc39ad-c870-4015-85f0-81c3ae60e53a"
 }
 variable "subscription_id" {
-  description = "prima subscription where terraform infra will be deployed"
+  description = "primary subscription where terraform infra will be deployed"
   default     = "37e54a95-aa6a-44b4-bb70-98492bccf76c"
 }
