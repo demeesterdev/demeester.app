@@ -1,12 +1,4 @@
 terraform {
-  backend "remote" {
-    organization = "demeesterdev"
-
-    workspaces {
-      name = "projects"
-    }
-  }
-
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
@@ -19,6 +11,10 @@ terraform {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = ">= 2.26"
+    }
+    github = {
+      source = "integrations/github"
+      version = "~> 4.9.4"
     }
   }
 }

@@ -40,7 +40,7 @@ if we stick it all together:
 ```
 terraform login
 az login
-gh login
+gh auth login
 
 $env:TERRAFORM_CONFIG = (resolve-path "~/appdata/roaming/terraform.d/credentials.tfrc.json")
 
